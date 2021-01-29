@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetBankingAdmin", "InternetBankingAdmin\InternetBankingAdmin.csproj", "{0AFD5B84-A9E1-4CF9-BC87-27A153D50A64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetBankingAPI", "InternetBankingAPI\InternetBankingAPI.csproj", "{760E7641-242A-4F3A-B30B-B71527558ED8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0AFD5B84-A9E1-4CF9-BC87-27A153D50A64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AFD5B84-A9E1-4CF9-BC87-27A153D50A64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AFD5B84-A9E1-4CF9-BC87-27A153D50A64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AFD5B84-A9E1-4CF9-BC87-27A153D50A64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{760E7641-242A-4F3A-B30B-B71527558ED8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{760E7641-242A-4F3A-B30B-B71527558ED8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{760E7641-242A-4F3A-B30B-B71527558ED8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{760E7641-242A-4F3A-B30B-B71527558ED8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E78C8F9-7ED8-45C4-ABF5-8838CEE6E529}
+	EndGlobalSection
+EndGlobal
