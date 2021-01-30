@@ -1,0 +1,85 @@
+﻿@model List<Transaction>
+@{
+    List<Transaction> transactions = Model;
+    ViewData["Title"] = "Transactions";
+}
+
+@*time range selector*@
+
+
+<form asp-controller="Transactions" asp-action="Index">
+    <div class="btn-group btn-group-inline"> Select a time range </div>
+
+    <div class="btn-group btn-group-inline">
+        <input id="startTime" name="start" type="text" class="form-control" value="">
+
+    </div>
+
+    <div class="btn-group btn-group-inline"> - </div>
+
+    <div class="btn-group btn-group-inline">
+        <input id="endTime" name="end" type="text" class="form-control" value="">
+
+    </div>
+
+    <div class="btn-group btn-group-inline">
+        <input type="submit" value="Apply" class="btn btn-primary" />
+    </div>
+
+    @section Scripts
+                {
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+        <script>
+            $(function () {
+                $('#start').datetimepicker();
+                $('#end').datetimepicker();
+            });
+        </script>
+    }
+
+</form>
+
+<div>
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(x => transactions[0].TransactionID)</th>
+            <th>@Html.DisplayNameFor(x => transactions[0].TransactionType)</th>
+            <th>@Html.DisplayNameFor(x => transactions[0].AccountNumber)</th>
+            <th>@Html.DisplayNameFor(x => transactions[0].DestAccountNumber)</th>
+            <th>@Html.DisplayNameFor(x => transactions[0].Amount)</th>
+            <th>@Html.DisplayNameFor(x => transactions[0].Comment)</th>
+            <th>@Html.DisplayNameFor(x => transactions[0].ModifyDate)</th>
+        </tr>
+        @{
+            if (transactions.Count == 0)
+            {
+                <h2>No transaction found.</h2>
+            }
+            else
+            {
+                foreach (Transaction transaction in transactions)
+                {
+
+                    <tr>
+                        @{
+                            <td>@Html.DisplayFor(x => transaction.TransactionID)</td>
+                            <td>@Html.DisplayFor(x => transaction.TransactionType)</td>
+                            <td>@Html.DisplayFor(x => transaction.AccountNumber)</td>
+                            <td>@Html.DisplayFor(x => transaction.DestAccountNumber)</td>
+                            <td>@Html.DisplayFor(x => transaction.Amount)</td>
+                            <td>@Html.DisplayFor(x => transaction.Comment)</td>
+                            <td>@Html.DisplayFor(x => transaction.ModifyDate)</td>
+                        }
+
+                    </tr>
+                }
+            }
+        }
+    </table>
+</div>
