@@ -20,7 +20,6 @@
   <ItemGroup>
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\BillPay\" />
-    <Folder Include="Views\Login\" />
     <Folder Include="Views\Transactions\" />
     <Folder Include="Views\Users\" />
   </ItemGroup>
