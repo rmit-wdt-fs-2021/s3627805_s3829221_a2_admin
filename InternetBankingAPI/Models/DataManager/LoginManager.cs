@@ -38,6 +38,19 @@ namespace InternetBankingAPI.Models.DataManager
         }
 
 
-        //public async Task Block(Login login)
+        public async Task Block(Login login)
+        {
+            login.IsBlocked = true;
+            _context.Update(login);
+            await _context.SaveChangesAsync();
+        }
+
+
+        public async Task Unblock(Login login)
+        {
+            login.IsBlocked = false;
+            _context.Update(login);
+            await _context.SaveChangesAsync();
+        }
     }
 }

@@ -36,5 +36,12 @@ namespace InternetBankingAPI.Models.DataManager
 
             return id;
         }
+
+        public async Task Block(BillPay billPay)
+        {
+            billPay.IsBlocked = true;
+            _context.Update(billPay);
+            await _context.SaveChangesAsync();
+        }
     }
 }
