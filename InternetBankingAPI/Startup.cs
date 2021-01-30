@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System;
 using Microsoft.EntityFrameworkCore;
 using InternetBankingAPI.Data;
 using InternetBankingAPI.Models.DataManager;
@@ -36,17 +35,9 @@ namespace InternetBankingAPI
             services.AddScoped<LoginManager>();
             services.AddScoped<TransactionManager>();
 
-            // Store session into the memory of the web server
-            services.AddDistributedMemoryCache();
-            services.AddSession(options =>
-            {
-                options.Cookie.IsEssential = true;
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-                // Add expiry time for session
-                options.IdleTimeout = TimeSpan.FromMinutes(30);
-            });
-
-            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "InternetBankingAPI", Version = "v1" });
@@ -66,7 +57,6 @@ namespace InternetBankingAPI
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
-            app.UseSession();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
