@@ -37,9 +37,18 @@ namespace InternetBankingAPI.Models.DataManager
             return id;
         }
 
-        public async Task Block(BillPay billPay)
+        public async Task Block(int billPayID)
         {
+            var billPay = await _context.BillPays.SingleOrDefaultAsync(x => x.BillPayID == billPayID);
             billPay.IsBlocked = true;
+            _context.Update(billPay);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task Unblock(int billPayID)
+        {
+            var billPay = await _context.BillPays.SingleOrDefaultAsync(x => x.BillPayID == billPayID);
+            billPay.IsBlocked = false;
             _context.Update(billPay);
             await _context.SaveChangesAsync();
         }

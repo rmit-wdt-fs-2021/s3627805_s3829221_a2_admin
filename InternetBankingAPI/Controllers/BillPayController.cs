@@ -26,17 +26,17 @@ namespace InternetBankingAPI.Controllers
         }
 
 
-        [HttpPut("Block")]
-        public async Task Block(BillPay billpay)
+        [HttpPut("Block/{billPayID}")]
+        public async Task Block(int billPayID)
         {
-            await _repo.Block(billpay);
+            await _repo.Block(billPayID);
         }
 
 
-        [HttpPut("Unblock")]
-        public async Task Unblock(BillPay billpay)
+        [HttpPut("Unblock/{billPayID}")]
+        public async Task Unblock(int billPayID)
         {
-            await _repo.Block(billpay);
+            await _repo.Unblock(billPayID);
         }
     }
 }

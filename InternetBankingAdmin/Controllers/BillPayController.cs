@@ -34,23 +34,23 @@ namespace InternetBankingAdmin.Controllers
         }
 
 
-        [HttpPost,Route("[Action]")]
-        public async Task<IActionResult> Block(BillPay billPay)
+        [HttpPost, Route("[Action]")]
+        public async Task<IActionResult> Block(int billPayID)
         {
-            var content = new StringContent(JsonConvert.SerializeObject(billPay), Encoding.UTF8, "application/json");
+            //var content = new StringContent(JsonConvert.SerializeObject(billPay), Encoding.UTF8, "application/json");
 
-            var response = await _client.PutAsync("api/Users/Block", content);
+            var response = await _client.PutAsync($"api/Users/Block/{billPayID}", null);
 
             return RedirectToAction(nameof(Index));
         }
 
 
-        [HttpPost,Route("[Action]")]
-        public async Task<IActionResult> Unblock(BillPay billPay)
+        [HttpPost, Route("[Action]")]
+        public async Task<IActionResult> Unblock(int billPayID)
         {
-            var content = new StringContent(JsonConvert.SerializeObject(billPay), Encoding.UTF8, "application/json");
+            //var content = new StringContent(JsonConvert.SerializeObject(billPay), Encoding.UTF8, "application/json");
 
-            var response = await _client.PutAsync("api/Users/Unblock", content);
+            var response = await _client.PutAsync($"api/Users/Unblock/{billPayID}", null);
 
             return RedirectToAction(nameof(Index));
         }
