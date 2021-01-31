@@ -48,16 +48,19 @@ namespace InternetBankingAdmin.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Index(int? customerID, DateTime? start, DateTime? end, int? page = 1)
+        public async Task<IActionResult> Index(int? customerID, string? start, string? end, int? page = 1)
         {
             HttpResponseMessage response = null;
+
+            var startForJson = DateTime.ParseExact(start, "yyyy-MM-dd'T'hh:mm:ss", null);
+            var endForJson = DateTime.ParseExact(end, "yyyy-MM-dd'T'hh:mm:ss", null);
 
             if (customerID != null && start == null && end == null)
                 response = await _client.GetAsync($"api/Transactions/{customerID}");
             else if (customerID == null && start != null && end != null)
                 response = await _client.GetAsync($"api/Transactions/start={start}&&end={end}");
             else if (customerID != null && start != null && end != null)
-                response = await _client.GetAsync($"api/Transactions/{customerID}&&start={start}&&end={end}");
+                response = await _client.GetAsync($"api/Transactions/{customerID}&&start={startForJson}&&end={endForJson}");
             else
                 response = await _client.GetAsync("api/Transactions");
             
