@@ -34,6 +34,7 @@ namespace InternetBankingAPI
             services.AddScoped<BillPayManager>();
             services.AddScoped<LoginManager>();
             services.AddScoped<TransactionManager>();
+            services.AddScoped<CustomersManager>();
 
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
