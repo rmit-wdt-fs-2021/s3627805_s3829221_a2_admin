@@ -19,10 +19,10 @@ namespace InternetBankingAdmin.Controllers
             var admin = new Admin();
 
             // Login failed
-            if (admin.ID != id || !PBKDF2.Verify(admin.PasswordHash, password))
+            if (!admin.ID.Equals(id) || !admin.Password.Equals(password))
             {
                 ModelState.AddModelError("LoginFailed", "Login failed, please try again.");
-                return View(new Login());
+                return View(new Admin { ID = id });
             }
 
             // Login succeeded
