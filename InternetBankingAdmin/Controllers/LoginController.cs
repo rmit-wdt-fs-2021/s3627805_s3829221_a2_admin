@@ -1,9 +1,6 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using InternetBankingAdmin.Models;
-using Microsoft.EntityFrameworkCore;
-using SimpleHashing;
 
 namespace InternetBankingAdmin.Controllers
 {

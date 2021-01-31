@@ -35,9 +35,9 @@ namespace InternetBankingAdmin.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Block(Login login)
+        public async Task<IActionResult> Block(BillPay billPay)
         {
-            var content = new StringContent(JsonConvert.SerializeObject(login), Encoding.UTF8, "application/json");
+            var content = new StringContent(JsonConvert.SerializeObject(billPay), Encoding.UTF8, "application/json");
 
             var response = await _client.PutAsync("api/Users/Block", content);
 
@@ -46,9 +46,9 @@ namespace InternetBankingAdmin.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Unblock(Login login)
+        public async Task<IActionResult> Unblock(BillPay billPay)
         {
-            var content = new StringContent(JsonConvert.SerializeObject(login), Encoding.UTF8, "application/json");
+            var content = new StringContent(JsonConvert.SerializeObject(billPay), Encoding.UTF8, "application/json");
 
             var response = await _client.PutAsync("api/Users/Unblock", content);
 
