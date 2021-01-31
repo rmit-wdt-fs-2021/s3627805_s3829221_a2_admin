@@ -52,8 +52,8 @@ namespace InternetBankingAdmin.Controllers
         {
             HttpResponseMessage response = null;
 
-            var startForJson = DateTime.ParseExact(start, "yyyy-MM-dd'T'hh:mm:ss", null);
-            var endForJson = DateTime.ParseExact(end, "yyyy-MM-dd'T'hh:mm:ss", null);
+            var startForJson = DateTime.ParseExact(start, "yyyy-MM-dd'T'hh:mm:ss", null).ToLongDateString();
+            var endForJson = DateTime.ParseExact(end, "yyyy-MM-dd'T'hh:mm:ss", null).ToLongDateString();
 
             if (customerID != null && start == null && end == null)
                 response = await _client.GetAsync($"api/Transactions/{customerID}");
