@@ -36,13 +36,7 @@ namespace InternetBankingAPI.Controllers
         [HttpGet("start={start}&&end={end}")]
         public async Task<IEnumerable<Transaction>> GetAll(DateTime start, DateTime end)
         {
-            var startString = start.ToString("dd/MM/yyyy h:mm:ss tt");
-            var startTime = DateTime.ParseExact(startString, "dd/MM/yyyy h:mm:ss tt", null);
-
-            var endString = end.ToString("dd/MM/yyyy h:mm:ss tt");
-            var endTime = DateTime.ParseExact(endString, "dd/MM/yyyy h:mm:ss tt", null);
-
-            return await _repo.GetAll(startTime, endTime);
+            return await _repo.GetAll(start, end);
         }
 
 
