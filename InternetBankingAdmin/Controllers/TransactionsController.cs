@@ -80,15 +80,15 @@ namespace InternetBankingAdmin.Controllers
             {
                 response = await _client.GetAsync("api/Transactions");
                 var result = await response.Content.ReadAsStringAsync();
-                transactions = (List<Transaction>)JsonConvert.DeserializeObject<List<Transaction>>(result)
-                    .Where(x => x.ModifyDate.CompareTo(startTime) >= 0 && x.ModifyDate.CompareTo(endTime) <= 0);
+                transactions = JsonConvert.DeserializeObject<List<Transaction>>(result)
+                    .FindAll(x => x.ModifyDate.CompareTo(startTime) >= 0 && x.ModifyDate.CompareTo(endTime) <= 0);
             }
             else if (customerID != null && hasStartTime && hasEndTime)
             {
                 response = await _client.GetAsync($"api/Transactions/{customerID}");
                 var result = await response.Content.ReadAsStringAsync();
-                transactions = (List<Transaction>)JsonConvert.DeserializeObject<List<Transaction>>(result)
-                    .Where(x => x.ModifyDate.CompareTo(startTime) >= 0 && x.ModifyDate.CompareTo(endTime) <= 0);
+                transactions = JsonConvert.DeserializeObject<List<Transaction>>(result)
+                    .FindAll(x => x.ModifyDate.CompareTo(startTime) >= 0 && x.ModifyDate.CompareTo(endTime) <= 0);
             }
             else
             {
