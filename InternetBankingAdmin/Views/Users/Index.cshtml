@@ -1,7 +1,65 @@
-﻿
+﻿@model List<Login>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Users";
+    List<Login> logins = Model;
 }
 
-<h1>Index</h1>
+<h1>Bill Pay</h1>
 
+<div>
+    <table class="table">
+        <tr>
+            <th> </th>
+            <th>Payee</th>
+            <th>@Html.DisplayNameFor(x => logins[0].IsBlocked)</th>
+            <th>@Html.DisplayNameFor(x => logins[0].LoginID)</th>
+            <th>@Html.DisplayNameFor(x => logins[0].CustomerID)</th>
+            <th>@Html.DisplayNameFor(x => logins[0].Customer.CustomerName)</th>
+
+        </tr>
+        @{
+            if (logins.Count == 0)
+            {
+                <h2>No users found.</h2>
+            }
+            else
+            {
+                foreach (Login login in logins)
+                {
+
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                @{
+                                    if (login.IsBlocked)
+                                    {
+                                        <form asp-controller="User" asp-action="Blcok">
+                                            <input hidden value="@login.LoginID" name="loginID">
+                                            <input type="submit" value="Unblock" class="btn btn-success" />
+                                        </form>
+
+                                    }
+                                    else
+                                    {
+                                        <form asp-controller="User" asp-action="Unblcok">
+                                            <input hidden value="@login.LoginID" name="loginID">
+                                            <input type="submit" value="Block" class="btn btn-danger" />
+                                        </form>
+
+                                    }
+                                }
+                            </div>
+                        </td>
+
+                        @{
+                            <td>@Html.DisplayFor(x => login.LoginID)</td>
+                            <td>@Html.DisplayFor(x => login.CustomerID)</td>
+                            <td>@Html.DisplayFor(x => login.Customer.CustomerName)</td>
+                        }
+
+                    </tr>
+                }
+            }
+        }
+    </table>
+</div>

@@ -31,7 +31,7 @@
                                 @{
                                     if (billPay.IsBlocked)
                                     {
-                                        <form asp-controller="BillPay" asp-action="Blcok">
+                                        <form asp-controller="BillPay" asp-action="Unblcok">
                                             <input hidden value="@billPay.BillPayID" name="billPayID">
                                             <input type="submit" value="Unblock" class="btn btn-success" />
                                         </form>
@@ -39,7 +39,7 @@
                                     }
                                     else
                                     {
-                                        <form asp-controller="BillPay" asp-action="Unblcok">
+                                        <form asp-controller="BillPay" asp-action="Block">
                                             <input hidden value="@billPay.BillPayID" name="billPayID">
                                             <input type="submit" value="Block" class="btn btn-danger" />
                                         </form>
