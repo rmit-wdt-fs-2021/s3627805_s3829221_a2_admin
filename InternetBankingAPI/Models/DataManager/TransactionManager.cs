@@ -4,7 +4,6 @@ using InternetBankingAPI.Models.Repository;
 using InternetBankingAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System;
 
 namespace InternetBankingAPI.Models.DataManager
 {
@@ -35,29 +34,6 @@ namespace InternetBankingAPI.Models.DataManager
             {
                 transactions.AddRange(account.Transactions);
             }
-
-            return transactions;
-        }
-
-
-        public async Task<IEnumerable<Transaction>> GetAll(DateTime start, DateTime end)
-        {
-            var transactions = await _context.Transactions.Where(x =>
-                x.ModifyDate.CompareTo(start) >= 0
-                && x.ModifyDate.CompareTo(end) <= 0)
-                .ToListAsync();
-
-            return transactions;
-        }
-
-
-        public async Task<IEnumerable<Transaction>> GetAll(int customerID, DateTime start, DateTime end)
-        {
-            var custTrans = await GetAll(customerID);
-
-            var transactions = custTrans.Where(x =>
-                x.ModifyDate.CompareTo(start) >= 0
-                && x.ModifyDate.CompareTo(end) <= 0);
 
             return transactions;
         }
