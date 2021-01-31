@@ -1,7 +1,10 @@
-﻿@model List<Transaction>
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Common
+@model IPagedList<Transaction>
 @{
-    var transactions = (List<Transaction>)Model;
-    var customers = (List<Customer>) ViewData["CustomerList"];
+    var transactions = (IPagedList<Transaction>)Model;
+    var customers = (List<Customer>)ViewData["CustomerList"];
     ViewData["Title"] = "Transactions";
 }
 
@@ -12,7 +15,7 @@
     <div class="btn-group btn-group-inline"> Select a customer </div>
     @*start date*@
     <div class="btn-group btn-group-inline">
-        <select>
+        <select class=" form-control" name="customerID">
             @{
                 foreach (Customer customer in customers)
                 {
@@ -100,4 +103,11 @@
             }
         }
     </table>
+
+    @Html.PagedListPager(transactions, page => Url.Action("Index", new { page }),
+        new PagedListRenderOptions
+            {
+            LiElementClasses = new[] { "page-item" },
+            PageClasses = new[] { "page-link" }
+        })
 </div>

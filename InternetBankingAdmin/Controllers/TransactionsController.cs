@@ -19,7 +19,7 @@ namespace InternetBankingAdmin.Controllers
         public TransactionsController(IHttpClientFactory clientFactory) => _clientFactory = clientFactory;
 
 
-        public async Task<IActionResult> Index(int? page)
+        public async Task<IActionResult> Index(int? page = 1)
         {
             var response = await _client.GetAsync("api/Transactions");
 
@@ -48,7 +48,7 @@ namespace InternetBankingAdmin.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Index(int? customerID, DateTime? start, DateTime? end, int? page)
+        public async Task<IActionResult> Index(int? customerID, DateTime? start, DateTime? end, int? page = 1)
         {
             HttpResponseMessage response = null;
 
