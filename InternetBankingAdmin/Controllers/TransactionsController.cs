@@ -71,6 +71,16 @@ namespace InternetBankingAdmin.Controllers
 
             IPagedList<Transaction> PagedTransactions = await transactions.ToPagedListAsync((int)page, 4);
 
+            var response2 = await _client.GetAsync("api/Customers");
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception();
+
+            var result2 = await response2.Content.ReadAsStringAsync();
+
+            var customers = JsonConvert.DeserializeObject<List<Customer>>(result2);
+            ViewData["CustomerList"] = customers;
+
             return View(PagedTransactions);
         }
     }
