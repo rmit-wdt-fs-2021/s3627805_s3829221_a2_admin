@@ -32,7 +32,14 @@
                                     if (billPay.IsBlocked)
                                     {
                                         <form asp-controller="BillPay" asp-action="Unblcok">
-                                            <input hidden value="@billPay.BillPayID" name="billPayID">
+                                            <input hidden value="@billPay.BillPayID" name="BillPayID">
+                                            <input hidden value="@billPay.AccountNumber" name="AccountNumber">
+                                            <input hidden value="@billPay.PayeeID" name="PayeeID">
+                                            <input hidden value="@billPay.Amount" name="Amount">
+                                            <input hidden value="@billPay.ScheduleDate" name="ScheduleDate">
+                                            <input hidden value="@billPay.Period" name="Period">
+                                            <input hidden value="@billPay.ModifyDate" name="ModifyDate">
+                                            <input hidden value="@billPay.IsBlocked" name="IsBlocked">
                                             <input type="submit" value="Unblock" class="btn btn-success" />
                                         </form>
 
@@ -40,7 +47,14 @@
                                     else
                                     {
                                         <form asp-controller="BillPay" asp-action="Block">
-                                            <input hidden value="@billPay.BillPayID" name="billPayID">
+                                            <input hidden value="@billPay.BillPayID" name="BillPayID">
+                                            <input hidden value="@billPay.AccountNumber" name="AccountNumber">
+                                            <input hidden value="@billPay.PayeeID" name="PayeeID">
+                                            <input hidden value="@billPay.Amount" name="Amount">
+                                            <input hidden value="@billPay.ScheduleDate" name="ScheduleDate">
+                                            <input hidden value="@billPay.Period" name="Period">
+                                            <input hidden value="@billPay.ModifyDate" name="ModifyDate">
+                                            <input hidden value="@billPay.IsBlocked" name="IsBlocked">
                                             <input type="submit" value="Block" class="btn btn-danger" />
                                         </form>
                                         

@@ -34,7 +34,7 @@ namespace InternetBankingAdmin.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost,Route("[Action]")]
         public async Task<IActionResult> Block(BillPay billPay)
         {
             var content = new StringContent(JsonConvert.SerializeObject(billPay), Encoding.UTF8, "application/json");
@@ -45,7 +45,7 @@ namespace InternetBankingAdmin.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost,Route("[Action]")]
         public async Task<IActionResult> Unblock(BillPay billPay)
         {
             var content = new StringContent(JsonConvert.SerializeObject(billPay), Encoding.UTF8, "application/json");
