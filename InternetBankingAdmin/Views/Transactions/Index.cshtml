@@ -17,6 +17,7 @@
     <div class="btn-group btn-group-inline">
         <select class=" form-control" name="customerID">
             @{
+                <option disabled selected value=""> Choose.. </option>
                 foreach (Customer customer in customers)
                 {
                     <option value=@customer.CustomerID> @Html.DisplayFor(x => customer.CustomerID) </option>
