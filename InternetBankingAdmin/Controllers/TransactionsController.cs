@@ -48,16 +48,36 @@ namespace InternetBankingAdmin.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Index(int? customerID, DateTime? start, DateTime? end, int? page = 1)
+        public async Task<IActionResult> Index(int? customerID, string? start, string? end, int? page = 1)
         {
             HttpResponseMessage response = null;
 
-            if (customerID != null && start == null && end == null)
+            var hasStartTime = DateTime.TryParseExact(start, "MM/dd/yyyy h:mm tt", null, System.Globalization.DateTimeStyles.None, out DateTime startTime);
+            DateTime parseStart = DateTime.UtcNow;
+            if (hasStartTime)
+            {
+                var startString = startTime.ToString("yyyy-MM-dd'T'hh:mm:ss");
+                parseStart = DateTime.ParseExact(startString, "yyyy-MM-dd'T'hh:mm:ss", null);
+            }
+
+            var hasEndTime = DateTime.TryParseExact(end, "MM/dd/yyyy h:mm tt", null, System.Globalization.DateTimeStyles.None, out DateTime endTime);
+            DateTime parseEnd = DateTime.UtcNow;
+            if (hasEndTime)
+            {
+                var endString = endTime.ToString("yyyy-MM-dd'T'hh:mm:ss");
+                parseEnd = DateTime.ParseExact(endString, "yyyy-MM-dd'T'hh:mm:ss", null);
+            }
+
+            if (customerID != null && !hasStartTime && !hasEndTime)
                 response = await _client.GetAsync($"api/Transactions/{customerID}");
-            else if (customerID == null && start != null && end != null)
-                response = await _client.GetAsync($"api/Transactions/start={start}&&end={end}");
-            else if (customerID != null && start != null && end != null)
-                response = await _client.GetAsync($"api/Transactions/{customerID}&&start={start}&&end={end}");
+            else if (customerID == null && hasStartTime && hasEndTime)
+            {
+                response = await _client.GetAsync($"api/Transactions/start={parseStart}&&end={parseEnd}");
+            }
+            else if (customerID != null && hasStartTime && hasEndTime)
+            {
+                response = await _client.GetAsync($"api/Transactions/{customerID}&&start={parseStart}&&end={parseEnd}");
+            }
             else
                 response = await _client.GetAsync("api/Transactions");
             
