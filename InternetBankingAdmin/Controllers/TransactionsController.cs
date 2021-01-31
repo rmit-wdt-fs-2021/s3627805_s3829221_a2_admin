@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using InternetBankingAdmin.Models;
 using Newtonsoft.Json;
 using InternetBankingAdmin.Filters;
-using System.Linq;
 
 namespace InternetBankingAdmin.Controllers
 {
@@ -52,20 +51,7 @@ namespace InternetBankingAdmin.Controllers
         public async Task<IActionResult> Index(int? customerID, string? start, string? end, int? page = 1)
         {
             var hasStartTime = DateTime.TryParseExact(start, "MM/dd/yyyy h:mm tt", null, System.Globalization.DateTimeStyles.None, out DateTime startTime);
-            //DateTime parseStart = DateTime.UtcNow;
-            //if (hasStartTime)
-            //{
-            //    var startString = startTime.ToString("yyyy-MM-dd'T'hh:mm:ss");
-            //    parseStart = DateTime.ParseExact(startString, "yyyy-MM-dd'T'hh:mm:ss", null);
-            //}
-
             var hasEndTime = DateTime.TryParseExact(end, "MM/dd/yyyy h:mm tt", null, System.Globalization.DateTimeStyles.None, out DateTime endTime);
-            //DateTime parseEnd = DateTime.UtcNow;
-            //if (hasEndTime)
-            //{
-            //    var endString = endTime.ToString("yyyy-MM-dd'T'hh:mm:ss");
-            //    parseEnd = DateTime.ParseExact(endString, "yyyy-MM-dd'T'hh:mm:ss", null);
-            //}
 
             List<Transaction> transactions = null;
             HttpResponseMessage response = null;
@@ -111,7 +97,11 @@ namespace InternetBankingAdmin.Controllers
             var result2 = await response2.Content.ReadAsStringAsync();
 
             var customers = JsonConvert.DeserializeObject<List<Customer>>(result2);
+
             ViewData["CustomerList"] = customers;
+            ViewData["CustomerID"] = customerID;
+            ViewData["startTime"] = startTime;
+            ViewData["endTime"] = endTime;
 
             return View(PagedTransactions);
         }
