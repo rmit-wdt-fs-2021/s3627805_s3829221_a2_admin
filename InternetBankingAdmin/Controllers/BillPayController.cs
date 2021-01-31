@@ -39,7 +39,7 @@ namespace InternetBankingAdmin.Controllers
         {
             //var content = new StringContent(JsonConvert.SerializeObject(billPay), Encoding.UTF8, "application/json");
 
-            var response = await _client.PutAsync($"api/Users/Block/{billPayID}", null);
+            var response = await _client.PutAsync($"api/BillPay/Block/{billPayID}", null);
 
             return RedirectToAction(nameof(Index));
         }
@@ -50,7 +50,7 @@ namespace InternetBankingAdmin.Controllers
         {
             //var content = new StringContent(JsonConvert.SerializeObject(billPay), Encoding.UTF8, "application/json");
 
-            var response = await _client.PutAsync($"api/Users/Unblock/{billPayID}", null);
+            var response = await _client.PutAsync($"api/BillPay/Unblock/{billPayID}", null);
 
             return RedirectToAction(nameof(Index));
         }
