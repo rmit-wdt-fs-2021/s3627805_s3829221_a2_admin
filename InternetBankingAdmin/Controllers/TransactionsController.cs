@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
+using X.PagedList;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using InternetBankingAdmin.Models;
@@ -19,7 +19,7 @@ namespace InternetBankingAdmin.Controllers
         public TransactionsController(IHttpClientFactory clientFactory) => _clientFactory = clientFactory;
 
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page)
         {
             var response = await _client.GetAsync("api/Transactions");
 
@@ -29,13 +29,16 @@ namespace InternetBankingAdmin.Controllers
             var result = await response.Content.ReadAsStringAsync();
 
             var transactions = JsonConvert.DeserializeObject<List<Transaction>>(result);
+            transactions.Sort();
 
-            return View(transactions);
+            IPagedList<Transaction> PagedTransactions = await transactions.ToPagedListAsync((int)page, 4);
+
+            return View(PagedTransactions);
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> Index(int? customerID, DateTime? start, DateTime? end)
+        public async Task<IActionResult> Index(int? customerID, DateTime? start, DateTime? end, int? page)
         {
             HttpResponseMessage response = null;
 
@@ -54,8 +57,11 @@ namespace InternetBankingAdmin.Controllers
             var result = await response.Content.ReadAsStringAsync();
 
             var transactions = JsonConvert.DeserializeObject<List<Transaction>>(result);
+            transactions.Sort();
 
-            return View(transactions);
+            IPagedList<Transaction> PagedTransactions = await transactions.ToPagedListAsync((int)page, 4);
+
+            return View(PagedTransactions);
         }
     }
 }
